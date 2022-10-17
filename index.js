@@ -76,7 +76,7 @@ function getYears(dataArr, finalsCB) {
     return years;
 }
 
-console.log('Task 3: getYears - ', getYears(fifaData,getFinals));
+// console.log('Task 3: getYears - ', getYears(fifaData,getFinals));
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use the higher-order function getWinners to do the following:  
@@ -86,10 +86,21 @@ Use the higher-order function getWinners to do the following:
 💡 HINT: Don't worry about ties for now (Please see the README file for info on ties for a stretch goal.)
 4. Returns the names of all winning countries in an array called `winners` */ 
 
-function getWinners(/* code here */) {
-    /* code here */
+function getWinners(dataArr, getFinalsCB) {
+    const finals = getFinalsCB(dataArr);
+    const winners =  [];
+    finals.forEach(element => {
+        if (element['Home Team Goals'] > element['Away Team Goals']){
+            winners.push(element['Home Team Name']);
+        } else if (element['Home Team Goals'] < element['Away Team Goals']) {
+            winners.push(element['Away Team Name']);
+        } else {
+            winners.push('It appears there was a tie?');
+        }
+    });
+    return winners
 }
-
+console.log('Task 4: ',getWinners(fifaData, getFinals));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
