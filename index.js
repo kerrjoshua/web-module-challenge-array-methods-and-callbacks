@@ -94,13 +94,21 @@ function getWinners(dataArr, getFinalsCB) {
             winners.push(element['Home Team Name']);
         } else if (element['Home Team Goals'] < element['Away Team Goals']) {
             winners.push(element['Away Team Name']);
+    //Win conditions": "France win on penalties (3 - 4)",
         } else {
-            winners.push('It appears there was a tie?');
+            const winConditions = element['Win conditions'];
+            if (winConditions.includes(element['Home Team Name'])) {
+            winners.push(element['Home Team Name']);
+            } else {
+                winners.push(element['Away Team Name'])
+            }
         }
     });
     return winners
 }
-console.log('Task 4: ',getWinners(fifaData, getFinals));
+
+
+//console.log('Task 4: ',getWinners(fifaData, getFinals));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -114,11 +122,21 @@ Use the higher-order function getWinnersByYear to do the following:
 💡 HINT: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(/* code here */) {
-    /* code here */
+function getWinnersByYear(dataArr, getFinalsCB, getYearsCB, getWinnersCB) {
+    
+    const years = getYearsCB(dataArr, getFinalsCB);
+    const winners = getWinnersCB(dataArr, getFinalsCB);
+    const messageArr = [];
+
+    for (let i = 0; i < years.length; i++) {
+        const msg = `In ${years[i]}, ${winners[i]} won the world cup!`
+        messageArr.push(msg);
+    }
+  return messageArr;
+
 }
 
-
+getWinnersByYear(fifaData, getFinals, getYears, getWinners);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use the higher order function `getAverageGoals` to do the following: 
