@@ -29,11 +29,11 @@ const game = filteredArr[0];
 //(e) Winner of 2014 world cup final */
 
 
-if (game['Home Team Goals'] > game['Away Team Goals']){
-    console.log(game['Home Team Name']);
-} else {
-    console.log(game['Away Team Name']);
-}
+// if (game['Home Team Goals'] > game['Away Team Goals']){
+//     console.log(game['Home Team Name']);
+// } else {
+//     console.log(game['Away Team Name']);
+// }
 
 
 
@@ -45,11 +45,22 @@ Use getFinals to do the following:
 💡 HINT - you should be looking at the stage key inside of the objects
 */
 
-function getFinals(/* code here */) {
-    /* code here */
+function getFinals(dataArr) {
+    return dataArr.filter((game) => {
+        return game['Stage'] === 'Final'
+    })
  }
+const wcFinals = fifaData.filter((game) => {
+    return game['Stage'] === 'Final'
+   
+});
+const wcYears = wcFinals.map((game) => {
+    return game.Year;
+});
 
-
+//console.log(wcYears);
+// console.log(getFinals(fifaData));
+// console.log((2014-1954)/4);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use the higher-order function called getYears to do the following: 
