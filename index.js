@@ -7,15 +7,34 @@ Practice accessing data by console.log-ing the following pieces of data note.
 
 💡 HINT: You may want to filter the data first 😉*/
 
+
+
 //(a) Home Team name for 2014 world cup final
+const filteredArr = fifaData.filter((game) => {
+   return game.Datetime.includes('2014') & game.Stage === 'Final';
+})
+const game = filteredArr[0];
+
+// console.log(game['Home Team Name']);
 
 //(b) Away Team name for 2014 world cup final
+// console.log(game['Away Team Name']);
 
 //(c) Home Team goals for 2014 world cup final
+// console.log(game['Home Team Goals']);
 
 //(d) Away Team goals for 2014 world cup final
+// console.log(game['Away Team Goals']);
 
 //(e) Winner of 2014 world cup final */
+
+
+if (game['Home Team Goals'] > game['Away Team Goals']){
+    console.log(game['Home Team Name']);
+} else {
+    console.log(game['Away Team Name']);
+}
+
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
