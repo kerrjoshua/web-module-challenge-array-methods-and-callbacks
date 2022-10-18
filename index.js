@@ -50,13 +50,13 @@ function getFinals(dataArr) {
         return game['Stage'] === 'Final'
     })
  }
-const wcFinals = fifaData.filter((game) => {
-    return game['Stage'] === 'Final'
+// const wcFinals = fifaData.filter((game) => {
+//     return game['Stage'] === 'Final'
    
-});
-const wcYears = wcFinals.map((game) => {
-    return game.Year;
-});
+// });
+// const wcYears = wcFinals.map((game) => {
+//     return game.Year;
+// });
 
 //console.log(wcYears);
 // console.log(getFinals(fifaData));
@@ -191,11 +191,65 @@ function getCountryWins(/* code here */) {
 /* 💪💪💪💪💪 Stretch 2: 💪💪💪💪💪 
 Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
 
-function getGoals(/* code here */) {
+// make an array, called 'teams', of objects to gather the team data. Each 'team' object in the array should have three keys, {name, goals, appearances}.
+//  go through the finals array and for each object gather the names and goals of the home and away teams in turn. 
+// Run teamAdder() for each team. 
 
-    /* code here */
+// teamAdder() accepts a team object as a parameter and checks if a team with that name already exists on the teams array, 
+//if not, it creates a new team object with the name and goals for the current team and sets the appearances counter to 1. If the team name is already a key in the object, increment 
+//the tally by the number of goals in the game and the appearances by 1.   
+// use arr.map to add a new averageGoals key, setting the value to the number of goals / appearances.
+
+
+function getGoals(dataArr) {
+
+  getFinals =  ((dataArr) =>{
+        return dataArr.filter((game) => {
+            return game['Stage'] === 'Final'
+        })
+    });
+
+    function teamAdder(currentTeam) {
+        if (teams.find(team => team.name === currentTeam.name) === undefined){
+            teams.push(currentTeam);
+        
+        } else {
+            teams.forEach((element) => {
+                if (element.name === currentTeam.name) {
+                    element.goals += currentTeam.goals;
+                    element.appearances += 1;
+                }
+            })
+        }
+            
+    }
+
+   const finals = getFinals(dataArr);
+
+    const teams = [];
+
+finals.forEach((game) => {
+    const homeTeam = {name: game['Home Team Name'], goals: game['Home Team Goals'], appearances: 1};
+    teamAdder(homeTeam);
+    const awayTeam = {name: game['Away Team Name'], goals: game['Away Team Goals'], appearances: 1};
+    teamAdder(awayTeam);
+})
+const teamsWithAverages = teams.map((currentTeam) => {
+    currentTeam.avgGoals = (currentTeam.goals / currentTeam.appearances).toFixed(2);
+    return currentTeam
+})
+
+const sortedTeamsWithAverages = teamsWithAverages.sort((firstItem, secondItem) => 
+    secondItem.avgGoals - firstItem.avgGoals)
+console.log(sortedTeamsWithAverages);
+  
+   return sortedTeamsWithAverages[0].name;
+         
+
 
 }
+
+console.log(getGoals(fifaData));
 
 
 /* 💪💪💪💪💪 Stretch 3: 💪💪💪💪💪
