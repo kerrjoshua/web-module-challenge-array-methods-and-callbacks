@@ -126,16 +126,16 @@ function getWinnersByYear(dataArr, getFinalsCB, getYearsCB, getWinnersCB) {
     
     const years = getYearsCB(dataArr, getFinalsCB);
     const winners = getWinnersCB(dataArr, getFinalsCB);
-    const messageArr = [];
+    // const messageArr = [];
 
-    for (let i = 0; i < years.length; i++) {
-        const msg = `In ${years[i]}, ${winners[i]} won the world cup!`
-        messageArr.push(msg);
-    }
-  return messageArr;
+    // for (let i = 0; i < years.length; i++) {
+    //     const msg = `In ${years[i]}, ${winners[i]} won the world cup!`
+    //     messageArr.push(msg);
+    // }
+  return years.map((item,index) =>  `In ${item}, ${winners[index]} won the world cup!`);
 
 }
-
+// console.log('Task 5',getWinnersByYear(fifaData, getFinals, getYears, getWinners))
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use the higher order function `getAverageGoals` to do the following: 
